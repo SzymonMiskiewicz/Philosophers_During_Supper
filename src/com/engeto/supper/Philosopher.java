@@ -23,7 +23,7 @@ public class Philosopher extends Thread{
                 }
                 if (rightHand.pickUp()){
 
-                if (portionsEaten<10000){
+                if (portionsEaten%100==0){
 
                     System.out.println(
                             name + " has taken " + leftHand.getNumberOfFork()
