@@ -1,0 +1,7 @@
+# .gitignore jest plikiem tekstowym.
+# to co zaczynamy od tego znaku # jest komentarzem!!!
+
+#Dla IntelliJ IDEA
+*.iml
+.idea/*
+out/*
