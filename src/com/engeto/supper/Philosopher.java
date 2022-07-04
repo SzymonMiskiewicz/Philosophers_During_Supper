@@ -1,45 +1,51 @@
 package com.engeto.supper;
 
-public class Philosopher extends Thread{
-    private String name;
-    private Fork leftHand;
-    private Fork rightHand;
-    private Integer portionsEaten;
-    private static final Integer PREPARED_PORTIONS = 10000;
+public class Philosopher implements Runnable {
+    private final Object leftFork;
+    private final Object rightFork;
 
-    public Philosopher(String name, Fork leftHand, Fork rightHand){
-        this.name = name;
-        this.leftHand = leftHand;
-        this.rightHand = rightHand;
-        this.portionsEaten = 0;
+    int foodCounter = 0;
+
+    public Philosopher(Object leftFork, Object rightFork) {
+        this.leftFork = leftFork;
+        this.rightFork = rightFork;
+    }
+
+    private void doAction (String action) throws InterruptedException {
+        System.out.println(Thread.currentThread().getName() + " "+ action);
+        Thread.sleep((int) Math.random() * 100);
     }
 
     @Override
     public void run() {
 
-        while (portionsEaten.compareTo(PREPARED_PORTIONS) != 0) {
+        while(foodCounter< 10000){
             try {
-                if (leftHand.pickUp()){
-                }
-                if (rightHand.pickUp()){
+                doAction(System.nanoTime() + ": thinking");
+                synchronized (leftFork){
+                    doAction(System.nanoTime()+": take left fork");
+                    synchronized (rightFork){
 
-                if (portionsEaten%100==0){
+                        foodCounter++;
+                        doAction(System.nanoTime()+": pick right fork and start eating "+foodCounter);
 
-                    System.out.println(
-                            name + " has taken " + leftHand.getNumberOfFork()
-                                    + " in his left hand and "
-                                    + rightHand.getNumberOfFork()
-                                    + " in his right hand during: (" + this.portionsEaten + " portion)");}
-                this.portionsEaten++;
+                        doAction(System.nanoTime()+": put down right fork");
+                    }
+                    doAction(System.nanoTime()+": Put down left fork and return to start thinking");
                 }
             } catch (InterruptedException e) {
                 e.printStackTrace();
-            } finally {
-                leftHand.putDown();
-                rightHand.putDown();
-
             }
+
         }
     }
+
 }
+
+
+
+
+
+
+
 
