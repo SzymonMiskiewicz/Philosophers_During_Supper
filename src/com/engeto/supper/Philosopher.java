@@ -19,7 +19,7 @@ public class Philosopher implements Runnable {
     @Override
     public void run() {
 
-        while(foodCounter< 50){
+        while(foodCounter< 10000){
             try {
                 doAction(System.nanoTime() + ": thinking");
                 synchronized (leftFork){
