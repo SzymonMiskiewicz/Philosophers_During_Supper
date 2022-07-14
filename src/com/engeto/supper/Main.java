@@ -15,7 +15,11 @@ public class Main {
             Object leftFork = forks[j];
             Object rightFork = forks[(j+1) % forks.length];
 
-            philosophers[j] = new Philosopher(leftFork, rightFork);
+            if (j == 0){
+                philosophers[j] = new Philosopher(rightFork, leftFork);
+            }
+            else{
+            philosophers[j] = new Philosopher(leftFork, rightFork);}
             
 
         Thread thread = new Thread(philosophers[j], "Philosopher "+(j+1));
