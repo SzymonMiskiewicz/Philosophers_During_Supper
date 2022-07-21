@@ -25,6 +25,7 @@ public class Philosopher implements Runnable {
         while(foodCounter< 10000) {
 
             try {
+                
                 doAction(System.nanoTime() + ": thinking");
 
                 synchronized (leftFork) {
