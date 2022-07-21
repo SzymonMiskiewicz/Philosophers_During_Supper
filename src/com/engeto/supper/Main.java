@@ -7,12 +7,12 @@ public class Main {
         Philosopher[] philosophers = new Philosopher[10];
         Object[] forks = new Object [philosophers.length];
 
-        for (int i =0;i<forks.length;i++){
+        for (int i =0;i<forks.length;i++) {
 
             forks[i] = new Object();
         }
 
-        for (int j = 0;j< philosophers.length;j++){
+        for (int j = 0;j< philosophers.length;j++) {
 
             Object leftFork = forks[j];
 
@@ -22,14 +22,14 @@ public class Main {
 
                 philosophers[j] = new Philosopher(rightFork, leftFork);
             }
-            else{
+            else {
 
             philosophers[j] = new Philosopher(leftFork, rightFork);}
 
         Thread thread = new Thread(philosophers[j], "Philosopher "+(j+1));
 
         thread.start();
-        
+
         }
 
     }

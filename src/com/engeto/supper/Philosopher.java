@@ -22,16 +22,16 @@ public class Philosopher implements Runnable {
     @Override
     public void run() {
 
-        while(foodCounter< 10000){
+        while(foodCounter< 10000) {
 
             try {
                 doAction(System.nanoTime() + ": thinking");
 
-                synchronized (leftFork){
+                synchronized (leftFork) {
 
                     doAction(System.nanoTime()+": take left fork");
 
-                    synchronized (rightFork){
+                    synchronized (rightFork) {
 
                         foodCounter++;
 
